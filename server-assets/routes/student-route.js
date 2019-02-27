@@ -3,50 +3,52 @@ let router = require('express').Router()
 
 //GET
 
-router.get( '' , (req , res , next) => {
+router.get('', (req, res, next) => {
     Students.find({})
         .then(students => {
-            res.status('200').send(students)
+            res.status(200).send(students)
         })
-        .catch( err => {
+        .catch(err => {
             res.status(400).send('error' + err)
         })
 })
 
 
-router.get('/:id' , (req , res , next) => {
-    Students.findById( req.params.id).populate('teacher')
+router.get('/:id', (req, res, next) => {
+    Students.findById(req.params.id).populate('teacher')
         .then(student => res.send(student))
-        .catch( err => {
+        .catch(err => {
             res.status(400).send('error' + err)
         })
 })
 
-router.post('',(req,res,next)=>{
+router.post('', (req, res, next) => {
     Students.create(req.body)
-    .then(student=>res.send(student))
-    .catch( err => {
-        res.status(400).send('error' + err)
-    })
-})
-
-router.put('/:id' , (req , res , next) => {
-    Students.findByIdAndUpdate(req.params.id , req.body , {new: true})
         .then(student => res.send(student))
-        .catch( err => {
+        .catch(err => {
             res.status(400).send('error' + err)
         })
 })
 
-router.delete('/:id' , (req , res , next) => {
+router.put('/:id', (req, res, next) => {
+    Students.findByIdAndUpdate(req.params.id, req.body, {
+            new: true
+        })
+        .then(student => res.send(student))
+        .catch(err => {
+            res.status(400).send('error' + err)
+        })
+})
+
+router.delete('/:id', (req, res, next) => {
     Students.findByIdAndDelete(req.param.id)
-        .then(() => 
-        res.send('Student has been banished!!!'))
-        .catch( err => {
+        .then(() =>
+            res.send('Student has been banished!!!'))
+        .catch(err => {
             res.status(400).send('error' + err)
         })
 })
 
 
 
-exports.router = router
+module.exports = router

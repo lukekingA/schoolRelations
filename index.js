@@ -8,7 +8,9 @@ let server = express()
 
 //MIDDLEWARE
 server.use(bp.json())
-server.unsubscribe(bp.urlencoded({extended: true}))
+server.use(bp.urlencoded({
+    extended: true
+}))
 
 
 //ROUTES  
@@ -16,13 +18,17 @@ let schoolRoutes = require('./server-assets/routes/school-route')
 let classroomRoutes = require('./server-assets/routes/classroom-route')
 let teacherRoutes = require('./server-assets/routes/teacher-route')
 let studentRoutes = require('./server-assets/routes/student-route')
-server.use('/api/schools', schoolRoutes )
-server.use('/api/classrooms', classroomRoutes )
-server.use('/api/teachers', teacherRoutes )
-server.use('/api/students', studentRoutes )
+server.use('/api/schools', schoolRoutes)
+server.use('/api/classrooms', classroomRoutes)
+server.use('/api/teachers', teacherRoutes)
+server.use('/api/students', studentRoutes)
+
+
+require('./server-assets/db/gearhost-config')
+
 
 //CATCHALL
-server.use('*' , (req , res , next) => {
+server.use('', (req, res, next) => {
     res.status(404).send('your a tool')
 })
 
@@ -30,8 +36,6 @@ server.use('*' , (req , res , next) => {
 
 
 //SERVER START
-server.listen(3000 , () => {
+server.listen(3000, () => {
     console.log('server listening')
 })
-
-

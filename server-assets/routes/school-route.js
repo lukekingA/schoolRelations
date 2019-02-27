@@ -15,48 +15,52 @@ let router = require('express').Router()
 // })
 
 
-router.get('/:id' , (req , res , next) => {
-    Schools.findById( req.params.id).populate('school')
+router.get('/:id', (req, res, next) => {
+    Schools.findById(req.params.id).populate('school')
         .then(school => res.send(school))
-        .catch( err => {
+        .catch(err => {
             res.status(400).send('error' + err)
         })
 })
 
-router.get('/:id/classrooms' , (req , res , next) => {
-    Schools.find({school: req.params.id}).populate('school')
+router.get('/:id/classrooms', (req, res, next) => {
+    Schools.find({
+            school: req.params.id
+        }).populate('school')
         .then(students => res.send(students))
-        .catch( err => {
+        .catch(err => {
             res.status(400).send('error' + err)
         })
 })
 
 
-router.post('',(req,res,next)=>{
+router.post('', (req, res, next) => {
     Schools.create(req.body)
-    .then(school=>res.send(school))
-    .catch( err => {
-        res.status(400).send('error' + err)
-    })
-})
-
-router.put('/:id' , (req , res , next) => {
-    Schools.findByIdAndUpdate(req.params.id , req.body , {new: true})
         .then(school => res.send(school))
-        .catch( err => {
+        .catch(err => {
             res.status(400).send('error' + err)
         })
 })
 
-router.delete('/:id' , (req , res , next) => {
+router.put('/:id', (req, res, next) => {
+    Schools.findByIdAndUpdate(req.params.id, req.body, {
+            new: true
+        })
+        .then(school => res.send(school))
+        .catch(err => {
+            res.status(400).send('error' + err)
+        })
+})
+
+router.delete('/:id', (req, res, next) => {
     Schools.findByIdAndDelete(req.param.id)
-        .then(() => 
-        res.send('School has been demolished!!!'))
-        .catch( err => {
+        .then(() =>
+            res.send('School has been demolished!!!'))
+        .catch(err => {
             res.status(400).send('error' + err)
         })
 })
 
 
 
-exports.router = router
+module.exports = router
