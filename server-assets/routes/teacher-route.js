@@ -16,7 +16,7 @@ router.get('', (req, res, next) => {
 
 
 router.get('/:id', (req, res, next) => {
-    Teachers.findById(req.params.id).populate('teacher')
+    Teachers.findById(req.params.id).populate('classroom')
         .then(teacher => res.send(teacher))
         .catch(err => {
             res.status(400).send('error' + err)
@@ -24,9 +24,9 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.get('/:id/students', (req, res, next) => {
-    Teachers.find({
+    Students.find({
             teacher: req.params.id
-        }).populate('teacher')
+        }).populate('classroom')
         .then(students => res.send(students))
         .catch(err => {
             res.status(400).send('error' + err)
@@ -53,7 +53,7 @@ router.put('/:id', (req, res, next) => {
 })
 
 router.delete('/:id', (req, res, next) => {
-    Teachers.findByIdAndDelete(req.param.id)
+    Teachers.findOneAndDelete(req.params.id)
         .then(() =>
             res.send('Teacher has been banished!!!'))
         .catch(err => {

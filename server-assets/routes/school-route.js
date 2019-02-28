@@ -16,7 +16,7 @@ let router = require('express').Router()
 
 
 router.get('/:id', (req, res, next) => {
-    Schools.findById(req.params.id).populate('school')
+    Schools.findById(req.params.id) //.populate('school')
         .then(school => res.send(school))
         .catch(err => {
             res.status(400).send('error' + err)
@@ -24,7 +24,7 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.get('/:id/classrooms', (req, res, next) => {
-    Schools.find({
+    Classrooms.find({
             school: req.params.id
         }).populate('school')
         .then(students => res.send(students))
@@ -53,7 +53,7 @@ router.put('/:id', (req, res, next) => {
 })
 
 router.delete('/:id', (req, res, next) => {
-    Schools.findByIdAndDelete(req.param.id)
+    Schools.findByIdAndDelete(req.params.id)
         .then(() =>
             res.send('School has been demolished!!!'))
         .catch(err => {
