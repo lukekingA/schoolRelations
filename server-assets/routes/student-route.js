@@ -41,7 +41,9 @@ router.put('/:id', (req, res, next) => {
 })
 
 router.delete('/:id', (req, res, next) => {
-    Students.findOneAndDelete(req.params.id)
+    Students.findOneAndDelete({
+            _id: req.params.id
+        })
         .then(() =>
             res.send('Student has been banished!!!'))
         .catch(err => {

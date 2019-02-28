@@ -2,10 +2,20 @@ let mongoose = require('mongoose')
 let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
 let teacher = new Schema({
-    name: {type: String , required: true },
-    classroom: {type: ObjectId , ref: "Classroom" , required: true},
-    students: { type: Schema.Types.ObjectId, 
-        ref: "Student" , virtual: true}
+        name: {
+                type: String,
+                required: true
+        },
+        classroom: {
+                type: ObjectId,
+                ref: "Classroom",
+                required: true
+        },
+        students: {
+                type: ObjectId,
+                ref: "Student",
+                virtual: true
+        }
 })
 
 
@@ -14,4 +24,4 @@ let teacher = new Schema({
 
 
 
-module.exports = mongoose.model('Teacher' , teacher)
+module.exports = mongoose.model('Teacher', teacher)

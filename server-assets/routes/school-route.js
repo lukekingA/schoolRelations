@@ -4,15 +4,15 @@ let router = require('express').Router()
 
 //GET
 
-// router.get( '' , (req , res , next) => {
-//     Schools.find({})
-//         .then(schools => {
-//             res.status('200').send(schools)
-//         })
-//         .catch( err => {
-//             res.status(400).send('error' + err)
-//         })
-// })
+router.get('', (req, res, next) => {
+    Schools.find({})
+        .then(schools => {
+            res.status('200').send(schools)
+        })
+        .catch(err => {
+            res.status(400).send('error' + err)
+        })
+})
 
 
 router.get('/:id', (req, res, next) => {
@@ -52,14 +52,14 @@ router.put('/:id', (req, res, next) => {
         })
 })
 
-router.delete('/:id', (req, res, next) => {
-    Schools.findByIdAndDelete(req.params.id)
-        .then(() =>
-            res.send('School has been demolished!!!'))
-        .catch(err => {
-            res.status(400).send('error' + err)
-        })
-})
+// router.delete('/:id', (req, res, next) => {
+//     Schools.findOneAndDelete({_id:req.params.id})
+//         .then(() =>
+//             res.send('School has been demolished!!!'))
+//         .catch(err => {
+//             res.status(400).send('error' + err)
+//         })
+// })
 
 
 

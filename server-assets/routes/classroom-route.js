@@ -53,7 +53,9 @@ router.put('/:id', (req, res, next) => {
 })
 
 router.delete('/:id', (req, res, next) => {
-    Classrooms.findOneAndDelete(req.params.id)
+    Classrooms.findOneAndDelete({
+            _id: req.params.id
+        })
         .then(() =>
             res.send('Classroom has been demolished!!!'))
         .catch(err => {
